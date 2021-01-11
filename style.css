@@ -75,7 +75,9 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	border-radius: 100%;
 }
 .header__descr {
+	max-width: 300px;
 	font-size: 40px;
+	text-align: right;
 }
 
 .center-top {
@@ -155,8 +157,41 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	font-size: 20px;
 }
 .footer__date {
-	font-size: 35px;
+	font-size: 30px;
 	text-align: center;
 	width: 140px;
 	padding: 5px;
+}
+
+/* weather__forecast */
+.weather__forecast {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-left: 5px;
+	height: 550px;
+	width: 250px;
+}
+.block {
+	height: 180px;
+	padding: 10px;
+	background-color: rgba(0, 0, 0, 0.527);
+	border-radius: 30px;
+}
+.block__top {
+	display: flex;
+	justify-content: space-between;
+}
+.block__top-temp {
+	font-size: 50px;
+	padding: 10px;
+}
+.block__descr {
+	text-align: center;
+	font-size: 24px;
+}
+.block__date {
+	text-align: center;
+	font-size: 18px;
+	margin-top: 20px;
 }
