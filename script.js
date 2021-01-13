@@ -14,6 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				pressure = document.querySelector('.footer__value.pressure'),
 				visibility = document.querySelector('.footer__value.visibility'),
 				date = document.querySelector('.footer__date');
+	const body = document.getElementById('body');
+
 	/* weather forecast */
 	const mainTempTwo = document.querySelector('.block__top-temp.day__two'),
 				mainTempThree = document.querySelector('.block__top-temp.day__three'),
@@ -27,15 +29,16 @@ window.addEventListener('DOMContentLoaded', () => {
 				dateDayTwo = document.querySelector('.block__date.date__two'),
 				dateDayThree = document.querySelector('.block__date.date__three'),
 				dateDayFour = document.querySelector('.block__date.date__four');
+
 	button.addEventListener('click', () => {
-		
-		fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${input.value}&cnt=4&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
+		fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${input.value}&cnt=23&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
 			.then(function (resp) { return resp.json() })
 			.then(function (data) {
 				console.log(data);
+				const indexImg = `${data.list[0].weather[0]['icon']}`;
 
 				mainTemp.innerHTML = Math.round(data.list[0].main.temp) + '&deg;';
-				img.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0]['icon']}@2x.png`;
+				img.src = `https://openweathermap.org/img/wn/${indexImg}@2x.png`;
 				description.textContent = data.list[0].weather[0]['description'];
 				feelsTemp.innerHTML = Math.round(data.list[0].main.feels_like) + '&deg;';
 				minTemp.innerHTML = Math.round(data.list[0].main.temp_min) + '&deg;';
@@ -43,55 +46,53 @@ window.addEventListener('DOMContentLoaded', () => {
 				cityName.textContent = `${data.city.name}, ${data.city.country}`;
 				humidity.innerHTML = data.list[0].main.humidity + '%';
 				precipitation.innerHTML = data.list[0].wind.speed + ' m/s';
-				pressure.innerHTML = data.list[0].main.pressure + ' mm';
+				pressure.innerHTML = Math.round(data.list[0].main.pressure / 1.33322) + ' mm';
 				visibility.innerHTML = (data.list[0].visibility)/1000 + ' km';
-				date.innerHTML = data.list[0].dt_txt;
-				
-				input.value = '';
-
+				date.innerHTML = (data.list[0].dt_txt).slice(0, 10);
+			
 				/* weather forecast */
-				mainTempTwo.innerHTML = Math.round(data.list[1].main.temp) + '&deg;';
-				mainTempThree.innerHTML = Math.round(data.list[2].main.temp) + '&deg;';
-				mainTempFour.innerHTML = Math.round(data.list[3].main.temp) + '&deg;';
-				imgDayTwo.src = `https://openweathermap.org/img/wn/${data.list[1].weather[0]['icon']}@2x.png`;
-				imgDayThree.src = `https://openweathermap.org/img/wn/${data.list[2].weather[0]['icon']}@2x.png`;
-				imgDayFour.src = `https://openweathermap.org/img/wn/${data.list[3].weather[0]['icon']}@2x.png`;
-				descrDayTwo.textContent = data.list[1].weather[0]['description'];
-				descrDayThree.textContent = data.list[2].weather[0]['description'];
-				descrDayFour.textContent = data.list[3].weather[0]['description'];
-				dateDayTwo.innerHTML = data.list[1].dt_txt;
-				dateDayThree.innerHTML = data.list[2].dt_txt;
-				dateDayFour.innerHTML = data.list[3].dt_txt;
+				mainTempTwo.innerHTML = Math.round(data.list[5].main.temp) + '&deg;';
+				mainTempThree.innerHTML = Math.round(data.list[14].main.temp) + '&deg;';
+				mainTempFour.innerHTML = Math.round(data.list[22].main.temp) + '&deg;';
+				imgDayTwo.src = `https://openweathermap.org/img/wn/${data.list[5].weather[0]['icon']}@2x.png`;
+				imgDayThree.src = `https://openweathermap.org/img/wn/${data.list[14].weather[0]['icon']}@2x.png`;
+				imgDayFour.src = `https://openweathermap.org/img/wn/${data.list[22].weather[0]['icon']}@2x.png`;
+				descrDayTwo.textContent = data.list[5].weather[0]['description'];
+				descrDayThree.textContent = data.list[14].weather[0]['description'];
+				descrDayFour.textContent = data.list[22].weather[0]['description'];
+				dateDayTwo.innerHTML = (data.list[5].dt_txt).slice(0, 10);
+				dateDayThree.innerHTML = (data.list[14].dt_txt).slice(0, 10);
+				dateDayFour.innerHTML = (data.list[22].dt_txt).slice(0, 10);
+				console.log(indexImg);
 
-
-			})
-			.catch(function () {
-					
-			});
-	});
-	/* button.addEventListener('click', () => {
-		fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
-			.then(function (resp) { return resp.json() })
-			.then(function (data) {
-				console.log(data);
-
-				mainTemp.innerHTML = Math.round(data.main.temp) + '&deg;';
-				img.src = `https://openweathermap.org/img/wn/${data.weather[0]['icon']}@2x.png`;
-				description.textContent = data.weather[0]['description'];
-				feelsTemp.innerHTML = Math.round(data.main.feels_like) + '&deg;';
-				minTemp.innerHTML = Math.round(data.main.temp_min) + '&deg;';
-				maxTemp.innerHTML = Math.round(data.main.temp_max) + '&deg;';
-				cityName.textContent = `${data.name}, ${data.sys.country}`;
-				humidity.innerHTML = data.main.humidity + '%';
-				precipitation.innerHTML = data.wind.speed + ' m/s';
-				pressure.innerHTML = data.main.pressure + ' mm';
-				visibility.innerHTML = (data.visibility)/1000 + ' km';
-				
 				input.value = '';
+
+				/* background */
+				if (indexImg == '01d' || indexImg == '01n') {
+						body.style.background = `url('img/clear_sky-min.jpg') 0 0/cover no-repeat`;
+				} else if (indexImg == '02d' || indexImg == '02n' || indexImg == '03d' || indexImg == '03n') {
+						body.style.background = `url('img/few_clouds-min.jpg') 0 0/cover no-repeat`;
+				} else if (indexImg == '04d' || indexImg == '04n') {
+						body.style.background = `url('img/broken_clouds-min.jpg') 0 0/cover no-repeat`;
+				} else if (indexImg == '09d' || indexImg == '09n' || indexImg == '10d' || indexImg == '10n') {
+						body.style.background = `url('img/rain-min.jpg') 0 0/cover no-repeat`;
+				} else if (indexImg == '11d' || indexImg == '11n') {
+						body.style.background = `url('img/thunderstorm-min.jpg') 0 0/cover no-repeat`;
+				} else if (indexImg == '13d' || indexImg == '13n') {
+						body.style.background = `url('img/snow-min.jpg') 0 0/cover no-repeat`;
+				} else {
+						body.style.background = `url('img/background-min.jpg') 0 0/cover no-repeat;`;
+				}
+
+
+
+		
 			})
 			.catch(function () {
 					
 			});
-	}); */
+
+			
+	});
 
 });

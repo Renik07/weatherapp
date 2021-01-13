@@ -18,11 +18,7 @@ nav,footer,header,aside{display: block;}
 
 html,body{
 	font-family: 'Yanone Kaffeesatz', sans-serif;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: url('img/clear_weather.jpg') 0 0 no-repeat;
-	background-size: cover;
+	background: url('img/background-min.jpg') 0 0/cover no-repeat;
 	height: 100%;
 	width: 100%;
 	font-size: 100%;
@@ -50,8 +46,15 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	width: 800px;
 	height: 550px;
 	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.527);
+	background-color: rgba(0, 0, 0, 0.4);
 	border-radius: 30px;
+}
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
 }
 
 .header {
@@ -175,7 +178,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 .block {
 	height: 180px;
 	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.527);
+	background-color: rgba(0, 0, 0, 0.4);
 	border-radius: 30px;
 }
 .block__top {
