@@ -19,6 +19,8 @@ nav,footer,header,aside{display: block;}
 html,body{
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	background: url('img/background-min.jpg') 0 0/cover no-repeat;
+	transition: all 1s ease 0s;
+	perspective: 2500px;
 	height: 100%;
 	width: 100%;
 	font-size: 100%;
@@ -50,6 +52,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	border-radius: 30px;
 }
 .container {
+	background: url('img/logo.png') 0 0 no-repeat;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -106,6 +109,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 }
 .center__title {
 	font-size: 50px;
+	transform-style: preserve-3d;
 }
 .center__input {
 	display: block;
@@ -180,6 +184,9 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	padding: 10px;
 	background-color: rgba(0, 0, 0, 0.4);
 	border-radius: 30px;
+	/* opacity: 0;
+	transform: translateX(-255px);
+	transition: all 2s; */
 }
 .block__top {
 	display: flex;
@@ -197,4 +204,20 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	text-align: center;
 	font-size: 18px;
 	margin-top: 20px;
+}
+
+.animation {
+	opacity: 0;
+	transform: translateX(-100px);
+	transition: all 1s ease 0s;
+}
+.animation__icon {
+	opacity: 0;
+	transform: translateY(-80px);
+	transition: all 1s ease 0s;
+}
+.active {
+	opacity: 1;
+	transform: translateX(0px);
+	transition: all 1s ease 0s;
 }

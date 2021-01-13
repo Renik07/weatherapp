@@ -63,7 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				dateDayTwo.innerHTML = (data.list[5].dt_txt).slice(0, 10);
 				dateDayThree.innerHTML = (data.list[14].dt_txt).slice(0, 10);
 				dateDayFour.innerHTML = (data.list[22].dt_txt).slice(0, 10);
-				console.log(indexImg);
 
 				input.value = '';
 
@@ -84,15 +83,41 @@ window.addEventListener('DOMContentLoaded', () => {
 						body.style.background = `url('img/background-min.jpg') 0 0/cover no-repeat;`;
 				}
 
-
-
-		
 			})
 			.catch(function () {
 					
 			});
 
-			
+		/* animation weather forecast and background */
+		const blockOne = document.querySelector('.block-1'),
+					blockTwo = document.querySelector('.block-2'),
+					blockThree = document.querySelector('.block-3'),
+					iconOne = document.querySelector('.img__two'),
+					iconTwo = document.querySelector('.img__three'),
+					iconThree = document.querySelector('.img__four');
+
+		const animation = item => {
+			item.classList.add('active');
+		};
+
+		blockOne.classList.add('active');
+		setTimeout(animation, 100, blockTwo);
+		setTimeout(animation, 200, blockThree);
+		setTimeout(animation, 250, iconOne);
+		setTimeout(animation, 350, iconTwo);
+		setTimeout(animation, 450, iconThree);
 	});
+
+	/* animation title */
+	const container = document.querySelector('.container'),
+				title = document.querySelector('.center__title');
+
+	container.addEventListener('mousemove', (e) => {
+		let offsetX = (window.innerWidth / 2 - e.pageX) / 30;
+		let offsetY = (window.innerHeight / 2 - e.pageY) / 30;
+
+		title.style.transform = `rotateY(${offsetX}deg) rotateX(${offsetY}deg)`;
+	});
+	
 
 });
