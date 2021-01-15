@@ -30,11 +30,13 @@ window.addEventListener('DOMContentLoaded', () => {
 				dateDayThree = document.querySelector('.block__date.date__three'),
 				dateDayFour = document.querySelector('.block__date.date__four');
 
-	button.addEventListener('click', () => {
-		fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${input.value}&cnt=23&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
+	requestApi('санкт-петербург');
+	
+	function requestApi (nameOfCity) {
+		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${nameOfCity}&cnt=25&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
 			.then(function (resp) { return resp.json() })
 			.then(function (data) {
-				console.log(data);
+
 				const indexImg = `${data.list[0].weather[0]['icon']}`;
 
 				mainTemp.innerHTML = Math.round(data.list[0].main.temp) + '&deg;';
@@ -51,22 +53,48 @@ window.addEventListener('DOMContentLoaded', () => {
 				date.innerHTML = (data.list[0].dt_txt).slice(0, 10);
 			
 				/* weather forecast */
-				mainTempTwo.innerHTML = Math.round(data.list[5].main.temp) + '&deg;';
-				mainTempThree.innerHTML = Math.round(data.list[14].main.temp) + '&deg;';
-				mainTempFour.innerHTML = Math.round(data.list[22].main.temp) + '&deg;';
-				imgDayTwo.src = `https://openweathermap.org/img/wn/${data.list[5].weather[0]['icon']}@2x.png`;
-				imgDayThree.src = `https://openweathermap.org/img/wn/${data.list[14].weather[0]['icon']}@2x.png`;
-				imgDayFour.src = `https://openweathermap.org/img/wn/${data.list[22].weather[0]['icon']}@2x.png`;
-				descrDayTwo.textContent = data.list[5].weather[0]['description'];
-				descrDayThree.textContent = data.list[14].weather[0]['description'];
-				descrDayFour.textContent = data.list[22].weather[0]['description'];
-				dateDayTwo.innerHTML = (data.list[5].dt_txt).slice(0, 10);
-				dateDayThree.innerHTML = (data.list[14].dt_txt).slice(0, 10);
-				dateDayFour.innerHTML = (data.list[22].dt_txt).slice(0, 10);
+				mainTempTwo.innerHTML = Math.round(data.list[8].main.temp) + '&deg;';
+				mainTempThree.innerHTML = Math.round(data.list[16].main.temp) + '&deg;';
+				mainTempFour.innerHTML = Math.round(data.list[24].main.temp) + '&deg;';
+				imgDayTwo.src = `https://openweathermap.org/img/wn/${data.list[8].weather[0]['icon']}@2x.png`;
+				imgDayThree.src = `https://openweathermap.org/img/wn/${data.list[16].weather[0]['icon']}@2x.png`;
+				imgDayFour.src = `https://openweathermap.org/img/wn/${data.list[24].weather[0]['icon']}@2x.png`;
+				descrDayTwo.textContent = data.list[8].weather[0]['description'];
+				descrDayThree.textContent = data.list[16].weather[0]['description'];
+				descrDayFour.textContent = data.list[24].weather[0]['description'];
+				dateDayTwo.innerHTML = (data.list[8].dt_txt).slice(0, 10);
+				dateDayThree.innerHTML = (data.list[16].dt_txt).slice(0, 10);
+				dateDayFour.innerHTML = (data.list[24].dt_txt).slice(0, 10);
+
+			})
+			.catch(function () {
+					
+			});
+
+		// animation title
+		const container = document.querySelector('.container'),
+					title = document.querySelector('.center__title');
+
+		container.addEventListener('mousemove', (e) => {
+			let offsetX = (window.innerWidth / 2 - e.pageX) / 30;
+			let offsetY = (window.innerHeight / 2 - e.pageY) / 30;
+
+			title.style.transform = `rotateY(${offsetX}deg) rotateX(${offsetY}deg)`;
+		});
+	}
+	
+	button.addEventListener('click', () => {
+
+		requestApi(input.value);
+		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${input.value}&cnt=23&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
+			.then(function (resp) { return resp.json() })
+			.then(function (data) {
+
+				const indexImg = `${data.list[0].weather[0]['icon']}`;
 
 				input.value = '';
 
-				/* background */
+				// background
 				if (indexImg == '01d' || indexImg == '01n') {
 						body.style.background = `url('img/clear_sky-min.jpg') 0 0/cover no-repeat`;
 				} else if (indexImg == '02d' || indexImg == '02n' || indexImg == '03d' || indexImg == '03n') {
@@ -88,7 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					
 			});
 
-		/* animation weather forecast and background */
+		// animation weather forecast and background
 		const blockOne = document.querySelector('.block-1'),
 					blockTwo = document.querySelector('.block-2'),
 					blockThree = document.querySelector('.block-3'),
@@ -108,7 +136,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		setTimeout(animation, 450, iconThree);
 	});
 
-	/* animation title */
+	// animation title
 	const container = document.querySelector('.container'),
 				title = document.querySelector('.center__title');
 
@@ -119,5 +147,4 @@ window.addEventListener('DOMContentLoaded', () => {
 		title.style.transform = `rotateY(${offsetX}deg) rotateX(${offsetY}deg)`;
 	});
 	
-
 });
