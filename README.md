@@ -1,3 +1,4 @@
 # weatherapp
-[image1]: //https://github.com/Renik07/weatherapp/blob/main/weatherapp.gif
-<a target="_blank" href="http://radikal.ru/big/pnbada87925rk"><img src="https://b.radikal.ru/b35/2101/91/a2edd607dded.gif" ></a>
+[image1]: //https://ibb.co/vQz24Ns
+<a href="https://ibb.co/vQz24Ns"><img src="https://i.ibb.co/ZYTyzQH/weatherapp2.gif" alt="weatherapp2" border="0"></a>
+<a href="https://ibb.co/vQz24Ns"><img src="https://i.ibb.co/vQz24Ns/weatherapp2.gif" alt="weatherapp2" border="0"></a>
