@@ -86,13 +86,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	button.addEventListener('click', () => {
 
 		requestApi(input.value);
-		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${input.value}&cnt=23&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
+		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${input.value}&cnt=25&appid=0a09bb79b78a53df09abb009ee97f5c9&lang=ru&units=metric`)
 			.then(function (resp) { return resp.json() })
 			.then(function (data) {
 
 				const indexImg = `${data.list[0].weather[0]['icon']}`;
 
 				input.value = '';
+				input.style.backgroundColor = 'white';
+				input.placeholder = 'название города';
 
 				// background
 				if (indexImg == '01d' || indexImg == '01n') {
@@ -113,7 +115,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			})
 			.catch(function () {
-					
+				input.style.backgroundColor = 'pink';
+				input.value = '';
+				input.placeholder = 'неверный адрес';
 			});
 
 		// animation weather forecast and background
